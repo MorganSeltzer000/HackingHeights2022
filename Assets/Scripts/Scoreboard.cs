@@ -8,12 +8,18 @@ public class Scoreboard : MonoBehaviour
 {
     //public Player myPlayer;
     public TextMeshProUGUI LivesText;
+    //int score;
     // Start is called before the first frame update
     void Start()
     {
         LivesText.text = Player.lives.ToString();
         //LivesText.transform.position = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
     }
+    /*
+    public void AddScore(int amount)
+    {
+        score += amount;
+    }*/
 
     public void LoseLife()
     {
@@ -31,6 +37,5 @@ public class Scoreboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //LivesText.text = myPlayer.lives.ToString();
     }
 }

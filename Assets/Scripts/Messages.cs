@@ -30,6 +30,7 @@ public class Messages : MonoBehaviour
         }
         MessageText.text = MessageQueue.Dequeue();
     }
+
     // Update is called once per frame
     void Update()
     {
