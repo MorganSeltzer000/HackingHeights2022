@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
-{   
+{
+    public Projectile PlayerBullet;
     // Start is called before the first frame update
     void Start()
     {
     }
 
+    float fireCooldown = 0.2f;
+    float timeUntilReload = 0;
+    float bulletSpeed = 4f;
     // Update is called once per frame
     void Update()
     {
@@ -17,8 +21,14 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         Vector2 direction = new Vector2(x, y).normalized;
-
         Move(direction);
+
+        if(Input.GetKey("space") & Time.time > timeUntilReload)
+        {
+            Projectile myBullet = Instantiate(PlayerBullet, this.transform.position, this.transform.rotation);
+            myBullet.SetTravel(Vector2.up, bulletSpeed);
+            timeUntilReload = Time.time + fireCooldown;
+        }
     }
 
     float SpriteWidth = 0.45f;
@@ -40,11 +50,11 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
-    public LayerMask myLayerMask;
+    public LayerMask enemyLayerMask;
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!ExtraLayers.LayerInLayerMask(collision.gameObject.layer, myLayerMask))
+        if (!ExtraLayers.LayerInLayerMask(collision.gameObject.layer, enemyLayerMask))
         {
             Die();
         }
