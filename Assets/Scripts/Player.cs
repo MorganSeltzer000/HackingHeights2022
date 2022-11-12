@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -12,9 +13,10 @@ public class Player : MonoBehaviour
     {
     }
 
-    float fireCooldown = 0.2f;
+    public static int lives = 3;
+    float fireCooldown = 0.25f;
     float timeUntilReload = 0;
-    float bulletSpeed = 4f;
+    float bulletSpeed = 7f;
     // Update is called once per frame
     void Update()
     {
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey("space") & Time.time > timeUntilReload)
         {
             Projectile myBullet = Instantiate(PlayerBullet, this.transform.position, this.transform.rotation);
-            myBullet.SetTravel(Vector2.up, bulletSpeed);
+            myBullet.SetTravel(Vector2.up, bulletSpeed + y*playerSpeed/2);
             timeUntilReload = Time.time + fireCooldown;
         }
     }
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!ExtraLayers.LayerInLayerMask(collision.gameObject.layer, enemyLayerMask))
+        if (ExtraLayers.LayerInLayerMask(collision.gameObject.layer, enemyLayerMask))
         {
             Die();
         }
@@ -64,12 +66,10 @@ public class Player : MonoBehaviour
             
         }*/
     }
-
-    public int lives = 3;
+    
     void Die()
     {
-        Destroy(gameObject);
-        if (lives < 0)
+        if (lives < 1)
         {
             GameOver();
             return;
@@ -77,6 +77,9 @@ public class Player : MonoBehaviour
         lives--;
         theScoreboard.LoseLife();
         //todo, implement waiting
+        Debug.Log("Hi there");
+        SceneManager.LoadScene("SampleScene");
+        Debug.Log("Hey there");
         theScoreboard.ShowLives();
         return;
     }
