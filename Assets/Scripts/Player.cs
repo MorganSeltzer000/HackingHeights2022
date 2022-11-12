@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
-{
-    
+{   
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +40,18 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
+    public LayerMask myLayerMask;
+    
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if((collision.CompareTag("Enemy")) ||  (collision.CompareTag("Bullit")))
+        if (!ExtraLayers.LayerInLayerMask(collision.gameObject.layer, myLayerMask))
         {
             Die();
         }
+        /*if((collision.CompareTag("Enemy")) ||  (collision.CompareTag("Bullit")))
+        {
+            
+        }*/
     }
 
     public int lives = 3;
