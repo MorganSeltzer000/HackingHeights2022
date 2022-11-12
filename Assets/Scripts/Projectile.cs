@@ -10,15 +10,33 @@ public class Projectile : MonoBehaviour
 
     [Tooltip("Life time till projectile dissipates")]
     public float lifeTime;
+    [Tooltip("Speed of this projectile")]
+    public float speed;
+    [HideInInspector]
+    public Vector2 travelDirection;
 
     void Awake()
     {
         projectileCollider = GetComponent<Collider2D>();
     }
 
-    public void SetVelocity(Vector2 velocity)
+    public void SetTravel(Vector2 direction, float speed)
     {
-        rb.velocity = velocity;
+        travelDirection = direction;
+        this.speed = speed;
+        rb.velocity = travelDirection * speed;
+    }
+
+    public void SetTravel(Vector2 direction)
+    {
+        travelDirection = direction;
+        rb.velocity = travelDirection * speed;
+    }
+
+    public void SetTravel(float speed)
+    {
+        this.speed = speed;
+        rb.velocity = travelDirection * speed;
     }
 
     void Update()
@@ -43,7 +61,7 @@ public class Projectile : MonoBehaviour
     /// <param name="time"></param>
     public virtual void OnProjectileFinish(float time)
     {
-        SetVelocity(new Vector2(0, 0));
+        SetTravel(new Vector2(0, 0));
         projectileCollider.enabled = false;
         Destroy(this.gameObject, time);
     }
