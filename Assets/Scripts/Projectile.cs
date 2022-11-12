@@ -153,6 +153,8 @@ public class Projectile : MonoBehaviour
         {
             return;
         }
+
+        OnProjectileFinish(0);
     }
 
     /// <summary>
