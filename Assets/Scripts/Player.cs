@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Projectile PlayerBullet;
+    public Scoreboard theScoreboard;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour
 
     float SpriteWidth = 0.45f;
     float SpriteHeight = 0.57f;
-    float speed = 4;
+    float playerSpeed = 4;
     void Move(Vector2 direction)
     {
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
         max.y = max.y - SpriteHeight / 2;
         min.y = min.y + SpriteHeight / 2;
         Vector2 pos = transform.position;
-        pos += direction * speed * Time.deltaTime;
+        pos += direction * playerSpeed * Time.deltaTime;
         pos.x = Mathf.Clamp(pos.x, min.x, max.x);
         pos.y = Mathf.Clamp(pos.y, min.y, max.y);
 
@@ -67,17 +68,20 @@ public class Player : MonoBehaviour
     public int lives = 3;
     void Die()
     {
+        Destroy(gameObject);
         if (lives < 0)
         {
             GameOver();
             return;
         }
         lives--;
-        //send some message
+        theScoreboard.LoseLife();
+        //todo, implement waiting
+        theScoreboard.ShowLives();
         return;
     }
     void GameOver()
     {
-        //stuff
+        theScoreboard.EndGame();
     }
 }

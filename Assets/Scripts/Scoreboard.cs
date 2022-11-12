@@ -16,8 +16,22 @@ public class Scoreboard : MonoBehaviour
         //LivesText.transform.position = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
     }
 
+    public void LoseLife()
+    {
+        LivesText.text = "Requiescat In Pace";
+    }
+
+    public void ShowLives()
+    {
+        LivesText.text = myPlayer.lives.ToString();
+    }
+    public void EndGame()
+    {
+        LivesText.text = "We're in the endgame now";
+    }
     // Update is called once per frame
     void Update()
     {
+        //LivesText.text = myPlayer.lives.ToString();
     }
 }
