@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float[] xRange = new float[2];
+    public float[] yRange = new float[2];
+
     // Start is called before the first frame update
     void Start()
     {

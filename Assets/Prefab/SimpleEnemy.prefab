@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3696725294371463582}
   - component: {fileID: 3696725294371463583}
   - component: {fileID: 3696725294371463580}
+  - component: {fileID: -1804461752440500476}
   m_Layer: 7
   m_Name: SimpleEnemy
   m_TagString: Untagged
@@ -113,6 +114,22 @@ MonoBehaviour:
   rotateSpeed: 0
   loopMovementBehaviour: 1
   loopRotationBehaviour: 1
+--- !u!70 &-1804461752440500476
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696725294371463581}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &3696725294929851290
 GameObject:
   m_ObjectHideFlags: 0
