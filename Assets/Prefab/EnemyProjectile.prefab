@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5043632769652776630}
   - component: {fileID: 5043632769652776625}
   - component: {fileID: 5043632769652776624}
-  m_Layer: 0
-  m_Name: Projectile
+  m_Layer: 8
+  m_Name: EnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -139,3 +139,8 @@ MonoBehaviour:
   rb: {fileID: 5043632769652776625}
   lifeTime: 3
   speed: 2
+  travelDirection: {x: 0, y: 0}
+  TargetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  TriggerFilter: -1
