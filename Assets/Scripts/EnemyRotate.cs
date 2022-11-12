@@ -12,4 +12,6 @@ public class EnemyRotate
     public RotationDirection rotationDirection;
     [SerializeField]
     public float duration;
+    [SerializeField]
+    public bool toBeLooped;
 }

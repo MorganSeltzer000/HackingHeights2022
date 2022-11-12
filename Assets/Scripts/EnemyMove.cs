@@ -10,4 +10,6 @@ public class EnemyMove
     public Vector2 direction;
     [SerializeField]
     public float duration;
+    [SerializeField]
+    public bool toBeLooped;
 }

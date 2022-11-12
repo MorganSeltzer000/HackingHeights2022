@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         movementDirection = Vector2.zero;
-        StartCoroutine(MovementControl());
-        StartCoroutine(RotationControl());
+        StartCoroutine(MovementControlInit());
+        StartCoroutine(RotationControlInit());
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
         Rotate();
     }
 
-    private IEnumerator MovementControl()
+    private IEnumerator MovementControlInit()
     {
         foreach (EnemyMove enemyMove in movementBehaviour)
         {
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
 
         if (loopMovementBehaviour)
         {
-            StartCoroutine(MovementControl());
+            StartCoroutine(MovementControlLoop());
         }
         else
         {
@@ -46,7 +46,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private IEnumerator RotationControl()
+    private IEnumerator MovementControlLoop()
+    {
+        foreach (EnemyMove enemyMove in movementBehaviour)
+        {
+            if (enemyMove.toBeLooped)
+            {
+                movementDirection = enemyMove.direction;
+                yield return new WaitForSeconds(enemyMove.duration);
+            }
+        }
+        StartCoroutine(MovementControlLoop());
+    }
+
+    private IEnumerator RotationControlInit()
     {
         foreach (EnemyRotate enemyRotate in rotationBehaviour)
         {
@@ -56,12 +69,25 @@ public class Enemy : MonoBehaviour
 
         if (loopRotationBehaviour)
         {
-            StartCoroutine(RotationControl());
+            StartCoroutine(RotationControlLoop());
         }
         else
         {
             rotationDirection = RotationDirection.Idle;
         }
+    }
+
+    private IEnumerator RotationControlLoop()
+    {
+        foreach (EnemyRotate enemyRotate in rotationBehaviour)
+        {
+            if (enemyRotate.toBeLooped)
+            {
+                rotationDirection = enemyRotate.rotationDirection;
+                yield return new WaitForSeconds(enemyRotate.duration);
+            }
+        }
+        StartCoroutine(RotationControlLoop());
     }
 
     private void Move()
