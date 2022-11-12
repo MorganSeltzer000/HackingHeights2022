@@ -6,13 +6,12 @@ using UnityEngine.UI;
 
 public class Scoreboard : MonoBehaviour
 {
-    public Player myPlayer;
+    //public Player myPlayer;
     public TextMeshProUGUI LivesText;
     // Start is called before the first frame update
-
     void Start()
     {
-        LivesText.text = myPlayer.lives.ToString();
+        LivesText.text = Player.lives.ToString();
         //LivesText.transform.position = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
     }
 
@@ -23,7 +22,7 @@ public class Scoreboard : MonoBehaviour
 
     public void ShowLives()
     {
-        LivesText.text = myPlayer.lives.ToString();
+        LivesText.text = Player.lives.ToString();
     }
     public void EndGame()
     {
