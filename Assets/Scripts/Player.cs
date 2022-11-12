@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -32,13 +33,36 @@ public class Player : MonoBehaviour
         min.x = min.x + SpriteWidth / 2;
         max.y = max.y - SpriteHeight / 2;
         min.y = min.y + SpriteHeight / 2;
-        Debug.Log("max x =" + max.x);
-        Debug.Log("min x =" + min.x);
         Vector2 pos = transform.position;
         pos += direction * speed * Time.deltaTime;
         pos.x = Mathf.Clamp(pos.x, min.x, max.x);
         pos.y = Mathf.Clamp(pos.y, min.y, max.y);
 
         transform.position = pos;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if((collision.CompareTag("Enemy")) ||  (collision.CompareTag("Bullit")))
+        {
+            Die();
+        }
+    }
+
+    public int lives = 3;
+    void Die()
+    {
+        if (lives < 0)
+        {
+            GameOver();
+            return;
+        }
+        lives--;
+        //send some message
+        return;
+    }
+    void GameOver()
+    {
+        //stuff
     }
 }
