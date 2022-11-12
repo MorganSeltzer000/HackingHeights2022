@@ -90,6 +90,32 @@ public class Enemy : MonoBehaviour
         StartCoroutine(RotationControlLoop());
     }
 
+    public LayerMask enemyLayerMask;
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (ExtraLayers.LayerInLayerMask(collision.gameObject.layer, enemyLayerMask))
+        {
+            Die();
+        }
+        /*if((collision.CompareTag("Enemy")) ||  (collision.CompareTag("Bullit")))
+        {
+            
+        }*/
+    }
+
+    int enemyLives = 5;
+    void Die()
+    {
+        if (enemyLives < 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        enemyLives--;
+        return;
+    }
+
     private void Move()
     {
         this.transform.position += (Vector3) movementDirection * movementSpeed * Time.deltaTime;

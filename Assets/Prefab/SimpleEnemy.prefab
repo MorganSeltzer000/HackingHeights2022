@@ -114,6 +114,9 @@ MonoBehaviour:
   rotateSpeed: 0
   loopMovementBehaviour: 1
   loopRotationBehaviour: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 576
 --- !u!70 &-1804461752440500476
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

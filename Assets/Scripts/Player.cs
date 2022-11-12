@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     float fireCooldown = 0.25f;
     float timeUntilReload = 0;
     float bulletSpeed = 7f;
+    float playerSpeed = 6;
     // Update is called once per frame
     void Update()
     {
@@ -36,7 +37,6 @@ public class Player : MonoBehaviour
 
     float SpriteWidth = 0.45f;
     float SpriteHeight = 0.57f;
-    float playerSpeed = 4;
     void Move(Vector2 direction)
     {
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
@@ -77,9 +77,7 @@ public class Player : MonoBehaviour
         lives--;
         theScoreboard.LoseLife();
         //todo, implement waiting
-        Debug.Log("Hi there");
         SceneManager.LoadScene("SampleScene");
-        Debug.Log("Hey there");
         theScoreboard.ShowLives();
         return;
     }
